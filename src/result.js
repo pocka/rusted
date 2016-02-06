@@ -7,6 +7,8 @@ let Result=Enum({
 	Err:''
 });
 
+let {Ok,Err}=Result;
+
 impl(Result,{
 	is_ok(self){
 		return match(self,{
@@ -95,13 +97,4 @@ let unwrap_failed=(msg,error)=>{
 	throw new Error(`${msg}: ${error}`);
 };
 
-let Ok=(x)=>{
-	return Result.Ok(x);
-};
-
-let Err=(e)=>{
-	return Result.Err(e);
-};
-
-export default Result;
-export {Ok,Err};
+export {Ok,Err,Result};

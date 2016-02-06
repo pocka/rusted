@@ -2,11 +2,13 @@ import Enum from './enum';
 import match from './match';
 import impl from './impl';
 
-import {Ok,Err} from './result';
+import {Result,Ok,Err} from './result';
 
-export default {
+export {
+	Result,
+	Ok,
+	Err,
 	Enum,
 	match,
-	impl,
-	Ok,Err
+	impl
 };
