@@ -4,7 +4,8 @@
   "description": "Rust like enum, Result and Option for javascript",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "$(npm bin)/babel-node ./node_modules/mocha/bin/_mocha",
+	"cover":"$(npm bin)/babel-node ./node_modules/isparta/bin/isparta cover --report html ./node_modules/mocha/bin/_mocha"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,13 @@
     "grunt": "~0.4.5",
     "mocha": "~2.4.5",
     "grunt-babel": "~6.0.0",
-	"grunt-este-watch":"git://github.com/pocka/grunt-este-watch",
-    "babel-preset-es2015": "~6.3.13"
+    "grunt-este-watch": "git://github.com/pocka/grunt-este-watch",
+    "babel-preset-es2015": "~6.3.13",
+    "babel-core": "~6.4.5",
+    "babel-cli": "~6.4.5",
+    "isparta": "~4.0.0"
+  },
+  "dependencies": {
+    "uid": "0.0.2"
   }
 }
