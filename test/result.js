@@ -21,6 +21,28 @@ describe('result.js',()=>{
 				expect(Err('Some error message').is_err()).to.be.true;
 			});
 		});
+		describe('#ok',()=>{
+			it('should returns Some(2)',()=>{
+				let x=Ok(2);
+				expect(x.ok().unwrap()).to.equal(2);
+				expect(x.ok().is_some()).to.be.true;
+			});
+			it('should returns None',()=>{
+				let x=Err('Nothing here');
+				expect(x.ok().is_none()).to.be.true;
+			});
+		});
+		describe('#err',()=>{
+			it('should returns None',()=>{
+				let x=Ok(2);
+				expect(x.err().is_none()).to.be.true;
+			});
+			it('should returns Some("Nothing here")',()=>{
+				let x=Err('Nothing here');
+				expect(x.err().unwrap()).to.equal('Nothing here');
+				expect(x.err().is_some()).to.be.true;
+			});
+		});
 		describe('#map',()=>{
 			it('should apply handler',()=>{
 				expect(match(Ok(5).map(n=>n*4),{

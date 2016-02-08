@@ -1,6 +1,7 @@
 import Enum from './enum';
 import impl from './impl';
 import match from './match';
+import {Some,None} from './option';
 
 let Result=Enum({
 	Ok:'',
@@ -19,10 +20,18 @@ impl(Result,{
 	is_err(self){
 		return !self.is_ok();
 	},
-	//ok(self){
-	//},
-	//err(self){
-	//},
+	ok(self){
+		return match(self,{
+			Ok:x=>Some(x),
+			Err:_=>None
+		});
+	},
+	err(self){
+		return match(self,{
+			Ok:_=>None,
+			Err:x=>Some(x)
+		});
+	},
 	map(self,op){
 		return match(self,{
 			Ok:t=>Ok(op(t)),
