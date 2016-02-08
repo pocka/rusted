@@ -1,4 +1,6 @@
 [![npm version](https://badge.fury.io/js/rusted.svg)](https://badge.fury.io/js/rusted)
+[![Coverage Status](https://coveralls.io/repos/github/pocka/rusted/badge.svg?branch=master)](https://coveralls.io/github/pocka/rusted?branch=master)
+[![Build Status](https://travis-ci.org/pocka/rusted.svg?branch=master)](https://travis-ci.org/pocka/rusted)
 
 # rusted
 
