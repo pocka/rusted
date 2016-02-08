@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "$(npm bin)/babel-node ./node_modules/mocha/bin/_mocha",
-    "cover": "$(npm bin)/babel-node ./node_modules/isparta/bin/isparta cover --report html ./node_modules/mocha/bin/_mocha"
+    "cover": "$(npm bin)/babel-node ./node_modules/isparta/bin/isparta cover --report lcov --report html ./node_modules/mocha/bin/_mocha"
   },
   "repository": {
     "type": "git",
