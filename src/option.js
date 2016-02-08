@@ -10,7 +10,7 @@ let Option=Enum({
 
 let {Some,None}=Option;
 
-impl(Result,{
+impl(Option,{
 	is_some(self){
 		return match(self,{
 			Some:true,
