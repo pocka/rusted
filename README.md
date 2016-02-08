@@ -12,8 +12,36 @@ npm install rusted
 ```
 
 ## Example
-This example requires es6 transpiler.
+This examples require es6 transpiler.
 
+### enum
+
+```rust
+enum Message {
+	Quit,
+	ChangeColor(i32,i32,i32),
+	Move {x:i32, y:i32},
+	Write(String),
+}
+
+let x: Message = Message::Move { x: 3, y: 4 };
+let y: Message = Message::Quit;
+```
+the above could written as below
+```javascript
+import {Enum} from 'rusted';
+
+let Message=Enum({
+	Quit:null,
+	ChangeColor:[0,0,0],
+	Move:{x:0,y:0},
+	Write:''
+});
+let x=Message.Move({x:3,y:4});
+let y=Message.Quit;
+```
+
+### Result
 ```javascript
 import {Ok,Err,match} from 'rusted';
 
