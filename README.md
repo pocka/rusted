@@ -1,6 +1,8 @@
+[![npm version](https://badge.fury.io/js/rusted.svg)](https://badge.fury.io/js/rusted)
+
 # rusted
 
-Rust-like enum, impl and match for javascript.
+Rust-like enum, Result, Option, impl and match for javascript.
 
 ## Install
 ```
