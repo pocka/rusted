@@ -31,7 +31,8 @@
     "babel-preset-es2015": "~6.3.13",
     "babel-core": "~6.4.5",
     "babel-cli": "~6.4.5",
-    "isparta": "~4.0.0"
+    "isparta": "~4.0.0",
+    "coveralls": "~2.11.6"
   },
   "dependencies": {
     "uid": "0.0.2"
