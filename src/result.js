@@ -96,7 +96,7 @@ impl(Result,{
 	},
 	unwrap_err(self){
 		return match(self,{
-			Ok:t=>unwrap_failed('called `Result::unwrap_err()` on an `Ok` value',e),
+			Ok:t=>unwrap_failed('called `Result::unwrap_err()` on an `Ok` value',t),
 			Err:e=>e
 		});
 	}
