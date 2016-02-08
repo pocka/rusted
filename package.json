@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "$(npm bin)/babel-node ./node_modules/mocha/bin/_mocha",
-    "cover": "$(npm bin)/babel-node ./node_modules/isparta/bin/isparta cover --report lcov --report html ./node_modules/mocha/bin/_mocha"
+    "cover": "$(npm bin)/babel-node ./node_modules/isparta/bin/isparta cover --report lcov --report html ./node_modules/mocha/bin/_mocha",
+    "coveralls": "$(npm bin)/babel-node ./node_modules/isparta/bin/isparta cover --report lcovonly ./node_modules/mocha/bin/_mocha && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
   },
   "repository": {
     "type": "git",
