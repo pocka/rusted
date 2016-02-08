@@ -12,7 +12,7 @@ npm install rusted
 ```
 
 ## Example
-This examples require es6 transpiler.
+These examples require es6 transpiler.
 
 ### enum
 
