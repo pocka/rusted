@@ -2,7 +2,7 @@ let impl=(to,what)=>{
 	let setter;
 	if(typeof to.__impl=='function'){
 		setter=to.__impl;
-	}else if(typeof to=='function'){
+	}else if(to.prototype){
 		setter=(name,fn)=>{
 			to.prototype[name]=function(){
 				return fn.apply({},[this].concat(Array.prototype.slice.apply(arguments,[0])));

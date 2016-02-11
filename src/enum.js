@@ -1,68 +1,64 @@
-import uid from 'uid';
-
-let EnumCreator=(variants)=>{
-	return new Enum(variants);
-};
-
-let Enum=function(variants){
+let factory=function(variants){
 	let EnumValue=function(name,data){
 		Object.defineProperties(this,{
-			'__id':{
-				value:uid(),
+			'__rusted':{
+				value:true,
 				writable:false,
-				enumerable:false
+				enumerable:false,
+				configurable:false
 			},
 			'__name':{
 				value:name,
 				writable:false,
-				enumerable:false
+				enumerable:false,
+				configurable:false
 			},
 			'__data':{
 				value:data,
 				writable:false,
-				enumerable:false
+				enumerable:false,
+				configurable:false
 			}
 		});
 	};
 
-	Object.defineProperty(EnumValue.prototype,'__rusted',{
-		value:true,
-		writable:false,
-		enumerable:false
-	});
-
-	Object.defineProperty(this,'__impl',{
-		value(name,fn){
-			EnumValue.prototype[name]=function(){
-				return fn.apply({},[this].concat(Array.prototype.slice.apply(arguments,[0])));
-			};
-		},
-		writable:false,
-		enumerable:false
-	});
+	let Enum={};
 
 	for(let variant in variants){
 		let data=variants[variant];
 
 		if(data===null){
-			Object.defineProperty(this,variant,{
+			Object.defineProperty(Enum,variant,{
 				get(){
 					return new EnumValue(variant,data);
 				},
-				enumerable:true
+				enumerable:true,
+				configurable:false
 			});
 		}else{
-			Object.defineProperty(this,variant,{
+			Object.defineProperty(Enum,variant,{
 				value(data){
 					return new EnumValue(variant,data);
 				},
 				writable:false,
-				enumerable:true
+				enumerable:true,
+				configurable:false
 			});
 		}
 	}
+
+	Object.defineProperty(Enum,'prototype',{
+		set(value){
+			EnumValue.prototype=value;
+		},
+		get(){
+			return EnumValue.prototype;
+		},
+		enumerable:false,
+		configurable:false
+	});
+
+	return Enum;
 };
 
-export default EnumCreator;
-
-export {Enum};
+export default factory;
