@@ -7,7 +7,7 @@ describe('index.js',()=>{
 	let apis=[
 		'Result','Ok','Err',
 		'Option','Some','None',
-		'Enum',
+		'Enum','struct',
 		'match','impl',
 		'panic'
 	];
