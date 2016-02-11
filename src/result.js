@@ -2,6 +2,7 @@ import Enum from './enum';
 import impl from './impl';
 import match from './match';
 import {Some,None} from './option';
+import panic from './panic';
 
 let Result=Enum({
 	Ok:'',
