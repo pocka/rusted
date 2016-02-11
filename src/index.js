@@ -6,7 +6,7 @@ import panic from './panic';
 import {Result,Ok,Err} from './result';
 import {Option,Some,None} from './option';
 
-export {
+export default {
 	Result,
 	Ok,
 	Err,
