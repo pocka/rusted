@@ -14,10 +14,10 @@ let check_type=function(type,value){
 };
 
 let factory=function(def){
-	let prop_info=Object.entries(def).map(([key,value])=>{
+	let prop_info=Object.keys(def).map((key)=>{
 		return {
 			name:key,
-			type:value,
+			type:def[key],
 			mutable:false
 		};
 	});
