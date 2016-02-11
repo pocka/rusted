@@ -1,6 +1,7 @@
 let expect=require('chai').expect;
 
 import Enum from '../src/enum';
+import struct from '../src/struct';
 import match from '../src/match';
 import impl from '../src/impl';
 
@@ -20,7 +21,7 @@ describe('impl.js',()=>{
 			expect(ClsFoo.prototype).to.have.property('bar');
 			expect((new ClsFoo()).bar()).to.equal('foo bar');
 		});
-		it('should works fine to Enum',()=>{
+		it('should works fine for Enum',()=>{
 			let Foo=Enum({
 				Foo:null,
 				Bar:0
@@ -39,6 +40,22 @@ describe('impl.js',()=>{
 
 			expect(bar.hoge(4)).to.equal(12);
 			expect(foo.hoge(5)).to.equal(5);
+		});
+		it('should works properly for struct',()=>{
+			let Position=struct({
+				x:'number',
+				y:'number'
+			});
+			impl(Position,{
+				toString(self){
+					return `(${self.x},${self.y})`;
+				}
+			});
+			let pos=Position({
+				x:0,
+				y:0
+			});
+			expect(pos.toString()).to.equal('(0,0)');
 		});
 	});
 });
