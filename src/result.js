@@ -103,7 +103,7 @@ impl(Result,{
 });
 
 let unwrap_failed=(msg,error)=>{
-	throw new Error(`${msg}: ${error}`);
+	panic(`${msg}: ${error}`);
 };
 
 export {Ok,Err,Result};

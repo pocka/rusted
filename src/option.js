@@ -2,6 +2,7 @@ import Enum from './enum';
 import impl from './impl';
 import match from './match';
 import {Ok,Err} from './result';
+import panic from './panic';
 
 let Option=Enum({
 	Some:true,
@@ -29,7 +30,7 @@ impl(Option,{
 	unwrap(self){
 		return match(self,{
 			Some:val=>val,
-			None:()=>{throw new Error('called `Option::unwrap()` on a `None` value')}
+			None:()=>panic('called `Option::unwrap()` on a `None` value')
 		});
 	},
 	unwrap_or(self,def){
@@ -107,7 +108,7 @@ impl(Option,{
 });
 
 let expect_failed=(msg)=>{
-	throw new Error(msg);
+	panic(msg);
 };
 
 export {Some,None,Option};

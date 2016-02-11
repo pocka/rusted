@@ -1,3 +1,5 @@
+import panic from './panic';
+
 let match=function(value,patterns){
 	let buf,
 		rusted=value.__rusted&&'__data' in value,
@@ -6,7 +8,7 @@ let match=function(value,patterns){
 		data=rusted?value.__data:value;
 
 	if((!rusted)&&!('_' in patterns)){
-		throw new Error(non_exhaustive_pattern);
+		panic(non_exhaustive_pattern);
 	}
 
 	if(name in patterns){
@@ -14,7 +16,7 @@ let match=function(value,patterns){
 	}else if('_' in patterns){
 		buf=patterns._;
 	}else{
-		throw new Error(non_exhaustive_pattern);
+		panic(non_exhaustive_pattern);
 	}
 
 	return typeof buf=='function'?buf(data):buf;
