@@ -48,9 +48,6 @@ let factory=function(variants){
 	}
 
 	Object.defineProperty(Enum,'prototype',{
-		set(value){
-			EnumValue.prototype=value;
-		},
 		get(){
 			return EnumValue.prototype;
 		},
