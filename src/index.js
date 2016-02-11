@@ -7,7 +7,7 @@ import struct from './struct';
 import {Result,Ok,Err} from './result';
 import {Option,Some,None} from './option';
 
-export default {
+module.exports={
 	Result,
 	Ok,
 	Err,
