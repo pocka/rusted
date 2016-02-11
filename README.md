@@ -6,6 +6,20 @@
 
 Rust-like enum, Result, Option, impl and match for javascript.
 
+## Feature
+- [x] `enum`
+	+ [ ] type checking
+- [x] `struct`
+	+ [x] type checking
+	+ [ ] mutable property
+- [x] `impl`
+	- [ ] static method
+- [ ] type alias
+- [x] `panic` (not a macro)
+- [x] `match`
+- [x] `Result`
+- [x] `Option`
+
 ## Install
 ```
 npm install rusted
@@ -14,22 +28,18 @@ npm install rusted
 ## Example
 These examples require es6 transpiler.
 
-### enum
+### `enum` (and `impl` (and `match`))
+```javascript
+import {Enum,impl,match} from 'rusted';
 
-```rust
+/*
 enum Message {
 	Quit,
 	ChangeColor(i32,i32,i32),
 	Move {x:i32, y:i32},
-	Write(String),
+	Write(String)
 }
-
-let x: Message = Message::Move { x: 3, y: 4 };
-let y: Message = Message::Quit;
-```
-the above could written as below
-```javascript
-import {Enum} from 'rusted';
+*/
 
 let Message=Enum({
 	Quit:null,
@@ -37,11 +47,81 @@ let Message=Enum({
 	Move:{x:0,y:0},
 	Write:''
 });
+
+// let x: Message = Message::Move { x: 3, y: 4 };
 let x=Message.Move({x:3,y:4});
+
+// let y: Message = Message::Quit;
 let y=Message.Quit;
+
+impl(Message,{
+	print(self){
+		console.log(match(self,{
+			Quit:()=>'Quit!',
+			ChangeColor:[r,g,b]=>`Changed to ${r},${g},${b}`,
+			Move:{x,y}=>`Moved to (${x},${y})`,
+			Write:x=>x
+		}));
+	}
+});
+
+x.print(); // > Moved to (3,4)
+y.print(); // > Quit!
 ```
 
-### Result
+### `struct` (and `impl`)
+`struct` checks type of property when instantiate.
+
++ `'any'`
+	- do not check type
++ `'number'`,`'string'`,`'object'`... (String)
+	- compared to `typeof value_of_prop`
++ `Object`,`Array`,`Number`... (Constructor)
+	- compared to `value_of_prop.constructor`
+
+```javascript
+import {struct,impl} from 'rusted';
+
+let Circle=struct({
+	x:'number',
+	y:'number',
+	radius:'number'
+});
+
+impl(Circle,{
+	area(self){
+		return Math.PI*(self.radius*self.radius);
+	}
+});
+
+let c=Circle({
+	x:0,y:0,
+	radius:2
+});
+
+console.log(c.area()); // > 12.56...
+```
+
+### `Option`
+```javascript
+import {Some,None,match} from 'rusted';
+
+let divide=(numerator,denominator)=>{
+	return denominator==0
+			? None
+			: Some(numerator/denominator);
+};
+
+let result = divide(2.0, 3.0);
+
+match(result,{
+	Some:x=>console.log(`Result: ${x}`),
+	None:()=>console.log('Cannot divide by 0')
+});
+// > Result: 0.666...
+```
+
+### `Result`
 ```javascript
 import {Ok,Err,match} from 'rusted';
 
