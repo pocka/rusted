@@ -21,6 +21,15 @@ describe('impl.js',()=>{
 			expect(ClsFoo.prototype).to.have.property('bar');
 			expect((new ClsFoo()).bar()).to.equal('foo bar');
 		});
+		it('should throws error when non-function object was passed',()=>{
+			expect(()=>{
+				impl('Foo',{
+					print(self){
+						console.log(self);
+					}
+				});
+			}).to.throw();
+		});
 		it('should works fine for Enum',()=>{
 			let Foo=Enum({
 				Foo:null,
