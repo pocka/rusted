@@ -1,6 +1,7 @@
 import Enum from './enum';
 import match from './match';
 import impl from './impl';
+import trait from './trait';
 import panic from './panic';
 import struct from './struct';
 import type from './type';
@@ -19,6 +20,7 @@ module.exports={
 	struct,
 	match,
 	impl,
+	trait,
 	panic,
 	type
 };
