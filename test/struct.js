@@ -38,6 +38,21 @@ describe('struct.js',()=>{
 				});
 			}).to.throw();
 		});
+		it('should works properly when constructor passed to type',()=>{
+			let Person=function(name){
+				this.name=name;
+			};
+			let Foo=struct({
+				bar:'string',
+				hoge:Person
+			});
+			let hoge=new Person('Hoge'),
+				foo=Foo({
+					bar:'bar',
+					hoge:hoge
+				});
+			expect(foo.hoge.name).to.equal('Hoge');
+		});
 		it('should throws error when some property were lacked',()=>{
 			let Foo=struct({
 				bar:'any',

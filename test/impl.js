@@ -30,6 +30,18 @@ describe('impl.js',()=>{
 				});
 			}).to.throw();
 		});
+		it('should works properly for constructor',()=>{
+			let Person=function(name){
+				this.name=name;
+			};
+			impl(Person,{
+				greet(self){
+					return `Hello, ${self.name}`;
+				}
+			});
+
+			expect((new Person('Foo')).greet()).to.equal('Hello, Foo');
+		});
 		it('should works fine for Enum',()=>{
 			let Foo=Enum({
 				Foo:null,

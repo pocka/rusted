@@ -50,6 +50,9 @@ describe('result.js',()=>{
 					Err:null
 				})).to.equal(20);
 			});
+			it('should returns Err(5)',()=>{
+				expect(Err(5).map(n=>n*4).unwrap_err()).to.equal(5);
+			});
 		});
 		describe('#map_err',()=>{
 			let stringify=(x)=>`error code: ${x}`;
@@ -181,6 +184,9 @@ describe('result.js',()=>{
 				expect(()=>{
 					Err('emergency failure').expect('Testing expect');
 				}).to.throw('Testing expect: emergency failure');
+			});
+			it('should unwrap value of Ok',()=>{
+				expect(Ok(3).expect('Testing expect')).to.equal(3);
 			});
 		});
 		describe('#unwrap_err',()=>{

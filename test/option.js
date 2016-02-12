@@ -72,6 +72,9 @@ describe('option.js',()=>{
 				let maybe_some_len=maybe_some_string.map(s=>s.length);
 				expect(maybe_some_len.unwrap()).to.equal(13);
 			});
+			it('should returns None',()=>{
+				expect(None.map(s=>s.length).is_none()).to.be.true;
+			});
 		});
 		describe('#map_or',()=>{
 			it('should returns 3',()=>{
