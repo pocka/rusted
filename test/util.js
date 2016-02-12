@@ -22,6 +22,9 @@ describe('util.js',()=>{
 		it('should return false when "function bar(self){}" was passed',()=>{
 			expect(util.is_static_method(function bar(self){})).to.be.false;
 		});
+		it('should return false when "function bar(self,foo){}" was passed',()=>{
+			expect(util.is_static_method(function bar(self,foo){})).to.be.false;
+		});
 	});
 	describe('#is_empty_function',()=>{
 		it('should return true when "function(){}" was passed',()=>{
