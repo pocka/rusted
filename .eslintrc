@@ -92,7 +92,6 @@ rules:
     - 2
     -
       allowShortCircuit: true
-    -
       allowTernary: true
   no-useless-call: 2
   no-useless-concat: 2
