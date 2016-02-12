@@ -14,7 +14,7 @@ Rust-like enum, Result, Option, impl and match for javascript.
 	+ [ ] mutable property
 - [x] `impl`
 	- [x] static method (associated function)
-- [ ] `trait`
+- [x] `trait`
 - [ ] `iter`
 - [x] type alias
 - [x] `panic` (not a macro)
