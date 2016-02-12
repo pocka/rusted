@@ -24,7 +24,7 @@ let factory=function(variants){
 
 	let Enum={};
 
-	for(let variant in variants){
+	Object.keys(variants).forEach((variant)=>{
 		let data=variants[variant];
 
 		if(data===null){
@@ -45,7 +45,7 @@ let factory=function(variants){
 				configurable:false
 			});
 		}
-	}
+	});
 
 	Object.defineProperty(Enum,'prototype',{
 		get(){

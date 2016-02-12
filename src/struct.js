@@ -1,13 +1,13 @@
 import panic from './panic';
 
 let check_type=function(type,value){
-	let is_constructor=typeof type=='function',
+	let is_constructor=typeof type==='function',
 		expected=type,
 		actual=is_constructor
 			? value.constructor
 			: typeof value ;
 	return {
-		match:type=='any'||expected==actual,
+		match:type==='any'||expected===actual,
 		expected:type,
 		actual:actual
 	};
