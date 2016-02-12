@@ -8,7 +8,7 @@ describe('index.js',()=>{
 		'Result','Ok','Err',
 		'Option','Some','None',
 		'Enum','struct',
-		'match','impl',
+		'match','impl','trait',
 		'panic'
 	];
 	it('should importing and exporting properly',()=>{
