@@ -1,9 +1,7 @@
 import panic from './panic';
 
 let impl=(to,what)=>{
-	let setter=typeof to.__impl=='function'
-			? to.__impl
-		: to.prototype
+	let setter=to.prototype
 			? (name,fn)=>{
 				to.prototype[name]=function(){
 					return fn.apply({},[this].concat(Array.prototype.slice.call(arguments,0)));
