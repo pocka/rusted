@@ -13,7 +13,7 @@ Rust-like enum, Result, Option, impl and match for javascript.
 	+ [x] type checking
 	+ [ ] mutable property
 - [x] `impl`
-	- [ ] static method
+	- [x] static method (associated function)
 - [ ] `trait`
 - [ ] `iter`
 - [x] type alias

@@ -4,6 +4,7 @@ import Enum from '../src/enum';
 import struct from '../src/struct';
 import match from '../src/match';
 import impl from '../src/impl';
+import type from '../src/type';
 
 describe('impl.js',()=>{
 	describe('#impl',()=>{
@@ -56,11 +57,15 @@ describe('impl.js',()=>{
 						Foo:num,
 						Bar:x=>x*num
 					});
+				},
+				fuga(){
+					return Foo.Foo;
 				}
 			});
 
 			expect(bar.hoge(4)).to.equal(12);
 			expect(foo.hoge(5)).to.equal(5);
+			expect(Foo.fuga().hoge(3)).to.equal(3);
 		});
 		it('should works properly for struct',()=>{
 			let Position=struct({
@@ -70,6 +75,9 @@ describe('impl.js',()=>{
 			impl(Position,{
 				toString(self){
 					return `(${self.x},${self.y})`;
+				},
+				from_array(arr){
+					return Position({x:arr[0],y:arr[1]});
 				}
 			});
 			let pos=Position({
@@ -77,6 +85,31 @@ describe('impl.js',()=>{
 				y:0
 			});
 			expect(pos.toString()).to.equal('(0,0)');
+			expect(Position.from_array([2,3]).toString()).to.equal('(2,3)');
+		});
+		it('should sets static method to constructor directly (associated function)',()=>{
+			let Foo=struct({
+				x:type.i32,
+				y:type.i32
+			});
+			impl(Foo,{
+				new(x,y){
+					return Foo({x:x||0,y:y||0});
+				}
+			});
+			expect(Foo).to.have.property('new');
+			expect(Foo.new(0,0)).to.be.instanceof(Foo);
+		});
+		it('should works on primitive type properly',()=>{
+			impl(Array,{
+				foo(el){
+					return el.reverse();
+				},
+				bar(self){
+					return self.map(n=>n*2).join(',');
+				}
+			});
+			expect(Array.foo([1,2,3]).bar()).to.equal('6,4,2');
 		});
 	});
 });
