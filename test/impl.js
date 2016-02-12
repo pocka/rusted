@@ -5,6 +5,7 @@ import struct from '../src/struct';
 import match from '../src/match';
 import impl from '../src/impl';
 import type from '../src/type';
+import trait from '../src/trait';
 
 describe('impl.js',()=>{
 	describe('#impl',()=>{
@@ -110,6 +111,68 @@ describe('impl.js',()=>{
 				}
 			});
 			expect(Array.foo([1,2,3]).bar()).to.equal('6,4,2');
+		});
+		it('should works with trait',()=>{
+			let FooTrait=trait({
+				foo(){
+					return true;
+				},
+				hoge(self){
+					return true;
+				},
+				new(){
+				},
+				print(self){}
+			});
+
+			let Bar=struct({
+				x:type.i32,
+				y:type.i32
+			});
+
+			impl(FooTrait,Bar,{
+				new(){
+					return Bar({x:0,y:0});
+				},
+				print(self){
+					return `${self.x},${self.y}`;
+				}
+			});
+
+			expect(Bar.foo()).to.be.true;
+
+			let bar=Bar({
+				x:0,y:0
+			});
+
+			expect(bar.hoge()).to.be.true;
+			expect(bar.print()).to.equal('0,0');
+
+			expect(Bar.new()).to.be.instanceof(Bar);
+		});
+		it('should panic when passed block not fully implement trait interface',()=>{
+			let FooTrait=trait({
+				foo(){}
+			});
+			let Bar=struct({});
+			expect(()=>{
+				impl(FooTrait,Bar);
+			}).to.throw();
+		});
+		it('should ignore unnecessary methods',()=>{
+			let FooTrait=trait({
+				foo(){}
+			});
+			let Bar=struct({});
+			impl(FooTrait,Bar,{
+				foo(){
+					return true;
+				},
+				bar(){
+					return true;
+				}
+			});
+			expect(Bar).not.to.have.property('bar');
 		});
 	});
 });
