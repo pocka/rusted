@@ -1,5 +1,8 @@
+let Trait=function(){
+};
+
 let factory=(block)=>{
-	let trait={};
+	let trait=new Trait();
 
 	for(let name in block){
 		Object.defineProperty(trait,name,{
@@ -14,3 +17,5 @@ let factory=(block)=>{
 };
 
 export default factory;
+
+export {Trait};
