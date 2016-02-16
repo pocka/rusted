@@ -1,17 +1,6 @@
 import panic from './panic';
 
-let check_type=function(type,value){
-	let is_constructor=typeof type==='function',
-		expected=type,
-		actual=is_constructor
-			? value.constructor
-			: typeof value ;
-	return {
-		match:type==='any'||expected===actual,
-		expected:type,
-		actual:actual
-	};
-};
+import {check_type} from './util';
 
 let factory=function(def){
 	let prop_info=Object.keys(def).map((key)=>{
