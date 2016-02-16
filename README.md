@@ -6,7 +6,9 @@
 
 # rusted
 
-Rust-like enum, Result, Option, impl and match for javascript.
+[Rust](https://github.com/rust-lang/rust)'s syntax features for javascript.
+
+These features will support us on writing program with functional way.
 
 ## Feature
 - [x] `enum`
@@ -26,25 +28,22 @@ Rust-like enum, Result, Option, impl and match for javascript.
 
 ## Install
 ```
-npm install rusted
+npm install --save rusted
 ```
 
 ## Example
-These examples require es6 transpiler.
+These examples require es6 transpiler like [Babel](https://github.com/babel/babel).
 
-### `enum` (and `impl` (and `match`))
+### `enum`
 ```javascript
-import {Enum,impl,match} from 'rusted';
+import {Enum} from 'rusted';
 
-/*
-enum Message {
-	Quit,
-	ChangeColor(i32,i32,i32),
-	Move {x:i32, y:i32},
-	Write(String)
-}
-*/
-
+//enum Message {
+//	Quit,
+//	ChangeColor(i32,i32,i32),
+//	Move {x:i32, y:i32},
+//	Write(String)
+//}
 let Message=Enum({
 	Quit:null,
 	ChangeColor:[0,0,0],
@@ -52,58 +51,135 @@ let Message=Enum({
 	Write:''
 });
 
-// let x: Message = Message::Move { x: 3, y: 4 };
-let x=Message.Move({x:3,y:4});
-
-// let y: Message = Message::Quit;
-let y=Message.Quit;
-
-impl(Message,{
-	print(self){
-		console.log(match(self,{
-			Quit:()=>'Quit!',
-			ChangeColor:[r,g,b]=>`Changed to ${r},${g},${b}`,
-			Move:{x,y}=>`Moved to (${x},${y})`,
-			Write:x=>x
-		}));
-	}
-});
-
-x.print(); // > Moved to (3,4)
-y.print(); // > Quit!
+// with data
+let x=Message.Move({x:3,y:4}); // let x: Message = Message::Move { x: 3, y: 4 };
+// without data
+let y=Message.Quit; // let y: Message = Message::Quit;
 ```
 
-### `struct` (and `impl`)
+### `struct`
 `struct` checks type of property when instantiate.
 
 + `'any'`
-	- do not check type
+	- accepts any type
 + `'number'`,`'string'`,`'object'`... (String)
 	- compared to `typeof value_of_prop`
 + `Object`,`Array`,`Number`... (Constructor)
 	- compared to `value_of_prop.constructor`
 
 ```javascript
-import {struct,impl} from 'rusted';
+import {struct} from 'rusted';
 
-let Circle=struct({
-	x:'number',
-	y:'number',
-	radius:'number'
+let Position=struct({
+	x:'number', // accepts if typeof x=="number"
+	y:'number'  // accepts if typeof y=="number"
 });
 
-impl(Circle,{
-	area(self){
-		return Math.PI*(self.radius*self.radius);
+let Player=struct({
+	name:'string', // accepts if typeof name=="string"
+	position:Position, // accepts if position.constructor==Position
+	items:Array, // accepts if items.constructor==Array
+	memory:'any' // accepts any type
+});
+
+let player=Player({
+	name:'foo',
+	position:Position({
+		x:0,y:0
+	}),
+	items:[],
+	memory:{}
+});
+
+console.log(player.position.x); // > 0
+```
+
+### `impl`
+```javascript
+import {Enum,struct,match,impl} from 'rusted';
+
+// For struct
+let SomeStruct=struct({
+	x:'number',y:'number'
+});
+
+impl(SomeStruct,{
+	// without placing `self` argument at first, we can declare associated function (static method)
+	new(x,y){
+		return SomeStruct({x,y});
+	},
+	print(self){
+		console.log(`(${x},${y})`);
 	}
 });
 
-let c=Circle({
-	x:0,y:0,
-	radius:2
+let some_struct=SomeStruct.new(2,3);
+some_struct.print(); // > (2,3)
+
+// For enum
+let SomeEnum=Enum({
+	Foo:null,
+	Bar:0
 });
 
-console.log(c.area()); // > 12.56...
+impl(SomeEnum,{
+	unwrap(self){
+		return match(self,{
+			Foo:()=>'Foo!',
+			Bar:x=>`Bar,${x}!`
+		});
+	}
+});
+
+let x=SomeEnum.Foo,y=SomeEnum.Bar(7);
+console.log(x.unwrap()); // > Foo!
+console.log(y.unwrap()); // > Bar,7!
+
+// For ordinary constructor (javascript class)
+let SomeConstructor=function(){
+	this.name='foo';
+};
+
+impl(SomeConstructor,{
+	create(){
+		return new SomeConstructor();
+	},
+	greet(self){
+		console.log(`Hello, ${self.name} !`);
+	}
+});
+
+let some_constructor=SomeConstructor.create();
+some_constructor.greet(); // > Hello, foo !
+```
+
+### `trait`
+```javascript
+import {struct,trait,impl} from 'rusted';
+
+let Foo=struct({
+	name:'string'
+});
+
+let BarTrait=trait({
+	print(self){}, // empty body, need to implement on `impl`
+	hello(self){ // has contents, not need to implement on `impl`
+		console.log('hello');
+	}
+});
+
+impl(BarTrait,Foo,{
+	print(self){
+		console.log(self.name);
+	}
+});
+/* This would be error
+impl(BarTrait,Foo,{});
+*/
+
+let foo=Foo({name:'Taro'});
+foo.print(); // > Taro
+foo.hello(); // > hello
 ```
 
 ### `Option`
@@ -112,8 +188,8 @@ import {Some,None,match} from 'rusted';
 
 let divide=(numerator,denominator)=>{
 	return denominator==0
-			? None
-			: Some(numerator/denominator);
+		? None // represents there are no data
+		: Some(numerator/denominator);
 };
 
 let result = divide(2.0, 3.0);
@@ -143,11 +219,8 @@ console.log(match(Foo(3),{
 }));
 // > Less than 5 !
 
-console.log(Foo(10).unwrap());
-// > 10
-console.log(Foo(3).unwrap());
-// throws error
-
+console.log(Foo(10).unwrap()); // > 10
+console.log(Foo(3).unwrap()); // throws error
 ```
 
 (es5 version.)
