@@ -98,7 +98,7 @@ impl(Option,{
 			Some:_=>self,
 			None:()=>f()
 		});
-	},
+	}
 	//take(self){
 	//},
 	//cloned(self){
