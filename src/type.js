@@ -23,7 +23,8 @@ let alias={
 	usize:js_type.number,
 	isize:js_type.number,
 	char:js_type.string,
-	str:js_type.string
+	str:js_type.string,
+	any:'any'
 };
 
 export default alias;
