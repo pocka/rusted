@@ -32,6 +32,38 @@ describe('enum.js',function(){
 			expect(e.Foo).to.be.a('function');
 			expect(e.Foo()).to.be.an('object');
 		});
+		it('should check type',()=>{
+			let Foo=Enum({
+				Num:'number',
+				Str:'string',
+				Obj:'object',
+				Arr:Array
+			});
+			expect(()=>{
+				Foo.Num(0);
+			}).not.to.throw();
+			expect(()=>{
+				Foo.Num('0');
+			}).to.throw();
+			expect(()=>{
+				Foo.Str('foo');
+			}).not.to.throw();
+			expect(()=>{
+				Foo.Str({});
+			}).to.throw();
+			expect(()=>{
+				Foo.Obj({});
+			}).not.to.throw();
+			expect(()=>{
+				Foo.Obj(undefined);
+			}).to.throw();
+			expect(()=>{
+				Foo.Arr([]);
+			}).not.to.throw();
+			expect(()=>{
+				Foo.Arr({0:0,1:1});
+			}).to.throw();
+		});
 	});
 	describe('EnumValue',()=>{
 		describe('#constructor',()=>{
