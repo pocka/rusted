@@ -4,15 +4,14 @@ let Trait=function(){
 let factory=(block)=>{
 	let trait=new Trait();
 
-	for(let name in block){
-		block.hasOwnProperty(name)
-			&& Object.defineProperty(trait,name,{
-				value:block[name],
-				enumerable:true,
-				writable:false,
-				configurable:false
-			});
-	}
+	Object.keys(block).forEach((name)=>{
+		Object.defineProperty(trait,name,{
+			value:block[name],
+			enumerable:true,
+			writable:false,
+			configurable:false
+		});
+	});
 
 	return trait;
 };
