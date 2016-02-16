@@ -1,3 +1,7 @@
+import panic from './panic';
+
+import {check_type} from './util';
+
 let factory=function(variants){
 	let EnumValue=function(name,data){
 		Object.defineProperties(this,{
@@ -30,15 +34,18 @@ let factory=function(variants){
 		if(data===null){
 			Object.defineProperty(Enum,variant,{
 				get(){
-					return new EnumValue(variant,data);
+					return new EnumValue(variant);
 				},
 				enumerable:true,
 				configurable:false
 			});
 		}else{
 			Object.defineProperty(Enum,variant,{
-				value(data){
-					return new EnumValue(variant,data);
+				value(value){
+					let {match,expected,actual}=check_type(data,value);
+					match
+						|| panic(`enum arm "${variant}" expects ${expected}, but ${actual} was passed.`) ;
+					return new EnumValue(variant,value);
 				},
 				writable:false,
 				enumerable:true,
