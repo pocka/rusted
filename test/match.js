@@ -8,7 +8,7 @@ describe('match.js',()=>{
 		describe('when value has __data and __rusted',()=>{
 			let Foo=Enum({
 				Foo:null,
-				Bar:0
+				Bar:'any'
 			});
 			it('should throws error when all patterns failed and there is no `_`',()=>{
 				let foo=Foo.Foo;

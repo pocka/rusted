@@ -3,10 +3,11 @@ import impl from './impl';
 import match from './match';
 import {Some,None} from './option';
 import panic from './panic';
+import type from './type';
 
 let Result=Enum({
-	Ok:'',
-	Err:''
+	Ok:type.any,
+	Err:type.any
 });
 
 let {Ok,Err}=Result;

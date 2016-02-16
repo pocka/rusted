@@ -3,9 +3,10 @@ import impl from './impl';
 import match from './match';
 import {Ok,Err} from './result';
 import panic from './panic';
+import type from './type';
 
 let Option=Enum({
-	Some:true,
+	Some:type.any,
 	None:null
 });
 

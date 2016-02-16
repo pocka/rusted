@@ -12,7 +12,7 @@ These features will support us on writing program with functional way.
 
 ## Feature
 - [x] `enum`
-	+ [ ] type checking
+	+ [x] type checking
 - [x] `struct`
 	+ [x] type checking
 	+ [ ] mutable property
@@ -45,10 +45,10 @@ import {Enum} from 'rusted';
 //	Write(String)
 //}
 let Message=Enum({
-	Quit:null,
-	ChangeColor:[0,0,0],
-	Move:{x:0,y:0},
-	Write:''
+	Quit:null, // no data
+	ChangeColor:Array, // accepts if data.constructor==Array
+	Move:'object', // accepts if typeof data=='object'
+	Write:'string' // accepts if typeof data=='string'
 });
 
 // with data
@@ -58,7 +58,7 @@ let y=Message.Quit; // let y: Message = Message::Quit;
 ```
 
 ### `struct`
-`struct` checks type of property when instantiate.
+`struct` and `enum` checks type of property when instantiate.
 
 + `'any'`
 	- accepts any type
@@ -119,7 +119,7 @@ some_struct.print(); // > (2,3)
 // For enum
 let SomeEnum=Enum({
 	Foo:null,
-	Bar:0
+	Bar:'number'
 });
 
 impl(SomeEnum,{
