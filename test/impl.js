@@ -47,7 +47,7 @@ describe('impl.js',()=>{
 		it('should works fine for Enum',()=>{
 			let Foo=Enum({
 				Foo:null,
-				Bar:0
+				Bar:'number'
 			}),
 			bar=Foo.Bar(3),
 			foo=Foo.Foo;

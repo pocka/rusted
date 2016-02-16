@@ -12,7 +12,7 @@ describe('enum.js',function(){
 		it('should includes passed variants name',function(){
 			var e=Enum({
 				Foo:null,
-				Bar:true
+				Bar:'any'
 			});
 			expect(e).to.have.property('Foo');
 			expect(e).to.have.property('Bar');
@@ -26,7 +26,7 @@ describe('enum.js',function(){
 		});
 		it('should sets property as a function unless null was passed',function(){
 			var e=Enum({
-				Foo:0
+				Foo:'any'
 			});
 			expect(e.Foo).not.to.be.an('object');
 			expect(e.Foo).to.be.a('function');
@@ -38,7 +38,7 @@ describe('enum.js',function(){
 			it('should sets the name',()=>{
 				let foo=Enum({
 					Foo:null,
-					Bar:0
+					Bar:'any'
 				});
 				expect(foo.Foo.__name).to.equal('Foo');
 				expect(foo.Bar(0).__name).to.equal('Bar');
