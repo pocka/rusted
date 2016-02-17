@@ -23,5 +23,7 @@ module.exports={
 	impl,
 	trait,
 	panic,
-	type
+	type,
+	mut,
+	imm
 };
