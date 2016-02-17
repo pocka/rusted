@@ -15,7 +15,7 @@ These features will support us on writing program with functional way.
 	+ [x] type checking
 - [x] `struct`
 	+ [x] type checking
-	+ [ ] mutable property
+	+ [x] mutable property
 - [x] `impl`
 	- [x] static method (associated function)
 - [x] `trait`
