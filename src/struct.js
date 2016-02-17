@@ -1,13 +1,18 @@
 import panic from './panic';
 
+import {Mutability} from './mutability';
+
 import {check_type} from './util';
 
 let factory=function(def){
 	let prop_info=Object.keys(def).map((key)=>{
+		let {type,mutable}=def[key] instanceof Mutability
+				? {type:def[key].data,mutable:def[key].mutable}
+				: {type:def[key],mutable:false} ;
 		return {
 			name:key,
-			type:def[key],
-			mutable:false
+			type,
+			mutable
 		};
 	});
 

@@ -2,6 +2,8 @@ import {expect} from 'chai';
 
 import struct from '../src/struct';
 
+import {imm,mut} from '../src/mutability';
+
 describe('struct.js',()=>{
 	describe('#factory',()=>{
 		it('should returns constructor',()=>{
@@ -64,6 +66,25 @@ describe('struct.js',()=>{
 					bar:1,
 					h:2
 				});
+			}).to.throw();
+		});
+		it('could have both mutable and immutable property',()=>{
+			let Foo=struct({
+				bar:mut('string'),
+				hoge:mut(Array),
+				fuga:'number'
+			});
+			let foo=Foo({
+				bar:'fooooo',
+				hoge:[0,1,2],
+				fuga:5
+			});
+			foo.bar='bar?';
+			foo.hoge=[1,2,3,4];
+			expect(foo.bar).to.equal('bar?');
+			expect(foo.hoge).to.deep.equal([1,2,3,4]);
+			expect(()=>{
+				foo.fuga=9;
 			}).to.throw();
 		});
 		it('should works properly',()=>{
