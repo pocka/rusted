@@ -2,6 +2,8 @@ import {expect} from 'chai';
 
 import struct from '../src/struct';
 
+import impl from '../src/impl';
+
 import {imm,mut} from '../src/mutability';
 
 describe('struct.js',()=>{
@@ -86,6 +88,21 @@ describe('struct.js',()=>{
 			expect(()=>{
 				foo.fuga=9;
 			}).to.throw();
+		});
+		it('should works properly if no arguments (Unit-like struct)',()=>{
+			let Unit=struct();
+			impl(Unit,{
+				foo(){
+					return 3;
+				},
+				bar(self){
+					return 4;
+				}
+			});
+			let value=Unit();
+
+			expect(value.bar()).to.equal(4);
+			expect(Unit.foo()).to.equal(3);
 		});
 		it('should works properly',()=>{
 			let OtherStruct=struct({

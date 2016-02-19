@@ -4,7 +4,7 @@ import {Mutability} from './mutability';
 
 import {check_type} from './util';
 
-let factory=function(def){
+let factory=function(def={}){
 	let prop_info=Object.keys(def).map((key)=>{
 		let {type,mutable}=def[key] instanceof Mutability
 				? {type:def[key].data,mutable:def[key].mutable}
