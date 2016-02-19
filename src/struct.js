@@ -17,6 +17,9 @@ let factory=function(def){
 	});
 
 	let struct=function(props){
+		if(!(this instanceof struct)){
+			return new struct(props);
+		}
 		prop_info.forEach(({name,type,mutable})=>{
 			name in props
 				|| panic(`Property ${name} does not found`);
@@ -34,18 +37,12 @@ let factory=function(def){
 		});
 	};
 
-	let creator=(props)=>{
-		return new struct(props);
-	};
-
-	creator.toString=()=>{
-		let props=prop_info.map((prop)=>`${prop.name}: ${prop.type}`).join(',');
+	struct.toString=function(){
+		let props=prop_info.map(prop=>`${prop.name}: ${prop.type}`).join(',');
 		return `rusted struct type: {${props} }`;
 	};
 
-	struct.prototype=creator.prototype;
-
-	return creator;
+	return struct;
 };
 
 export default factory;
