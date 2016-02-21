@@ -6,6 +6,8 @@ import impl from '../src/impl';
 
 import {imm,mut} from '../src/mutability';
 
+import Enum from '../src/enum';
+
 describe('struct.js',()=>{
 	describe('#factory',()=>{
 		it('should returns constructor',()=>{
@@ -109,11 +111,15 @@ describe('struct.js',()=>{
 				x:'number',
 				y:'number'
 			});
+			let SomeEnum=Enum({
+				Foo:null
+			});
 			let Foo=struct({
 				bar:'any',
 				hoge:'number',
 				fuga:Array,
-				piyo:OtherStruct
+				piyo:OtherStruct,
+				some:SomeEnum
 			});
 			let foo;
 			expect(()=>{
@@ -124,7 +130,8 @@ describe('struct.js',()=>{
 					piyo:OtherStruct({
 						x:1,
 						y:2
-					})
+					}),
+					some:SomeEnum.Foo
 				});
 			}).not.to.throw();
 			expect(foo.bar).to.deep.equal({x:0,y:0});

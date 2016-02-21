@@ -1,14 +1,27 @@
 var expect=require('chai').expect;
 
 import Enum from '../src/enum';
+import {check_type} from '../src/util';
 
 describe('enum.js',function(){
 	describe('#Enum',function(){
-		it('should returns Enum factory object',function(){
-			expect(Enum({})).to.be.an('object');
+		it('should returns Enum',function(){
+			expect(Enum({})).to.be.an('function');
 		});
 	});
-	describe('Enum factory object returned by factory',function(){
+	describe('Enum returned by factory',function(){
+		it('should be used as type',()=>{
+			let Foo=Enum({
+					Hoge:null
+				}),
+				Bar=Enum({
+					Hoge:null
+				});
+			expect(check_type(Foo,Foo.Hoge).match)
+				.to.be.true;
+			expect(check_type(Foo,Bar.Hoge).match)
+				.to.be.false;
+		});
 		it('should includes passed variants name',function(){
 			var e=Enum({
 				Foo:null,

@@ -26,13 +26,11 @@ let factory=function(variants){
 		});
 	};
 
-	let Enum={};
-
 	Object.keys(variants).forEach((variant)=>{
 		let data=variants[variant];
 
 		if(data===null){
-			Object.defineProperty(Enum,variant,{
+			Object.defineProperty(EnumValue,variant,{
 				get(){
 					return new EnumValue(variant);
 				},
@@ -40,7 +38,7 @@ let factory=function(variants){
 				configurable:false
 			});
 		}else{
-			Object.defineProperty(Enum,variant,{
+			Object.defineProperty(EnumValue,variant,{
 				value(value){
 					let {match,expected,actual}=check_type(data,value);
 					match
@@ -54,15 +52,7 @@ let factory=function(variants){
 		}
 	});
 
-	Object.defineProperty(Enum,'prototype',{
-		get(){
-			return EnumValue.prototype;
-		},
-		enumerable:false,
-		configurable:false
-	});
-
-	return Enum;
+	return EnumValue;
 };
 
 export default factory;
