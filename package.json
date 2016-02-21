@@ -1,6 +1,6 @@
 {
   "name": "rusted",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Rust like enum, Result and Option for javascript",
   "main": "lib/index.js",
   "scripts": {
