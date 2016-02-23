@@ -8,7 +8,7 @@
 
 [Rust](https://github.com/rust-lang/rust)'s syntax features for javascript.
 
-These features will support us on writing program with functional way.
+These features will help our functional programming.
 
 ## Feature
 - [x] `enum`
