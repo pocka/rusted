@@ -46,4 +46,12 @@ describe('util.js',()=>{
 			expect(util.is_empty_function(function(foo){bar=void 0;})).to.be.false;
 		});
 	});
+	describe('#format_static_method_name',()=>{
+		it('should slice name when "$foo" was passed',()=>{
+			expect(util.format_static_method_name('$foo')).to.equal('foo');
+		});
+		it('should not slice name when "foo" was passed',()=>{
+			expect(util.format_static_method_name('foo')).to.equal('foo');
+		});
+	});
 });

@@ -59,7 +59,7 @@ describe('impl.js',()=>{
 						Bar:x=>x*num
 					});
 				},
-				fuga(){
+				$fuga(){
 					return Foo.Foo;
 				}
 			});
@@ -77,7 +77,7 @@ describe('impl.js',()=>{
 				toString(self){
 					return `(${self.x},${self.y})`;
 				},
-				from_array(arr){
+				$from_array(arr){
 					return Position({x:arr[0],y:arr[1]});
 				}
 			});
@@ -94,7 +94,7 @@ describe('impl.js',()=>{
 				y:type.i32
 			});
 			impl(Foo,{
-				new(x,y){
+				$new(x,y){
 					return Foo({x:x||0,y:y||0});
 				}
 			});
@@ -103,7 +103,7 @@ describe('impl.js',()=>{
 		});
 		it('should works on primitive type properly',()=>{
 			impl(Array,{
-				foo(el){
+				$foo(el){
 					return el.reverse();
 				},
 				bar(self){
@@ -114,13 +114,13 @@ describe('impl.js',()=>{
 		});
 		it('should works with trait',()=>{
 			let FooTrait=trait({
-				foo(){
+				$foo(){
 					return true;
 				},
 				hoge(self){
 					return true;
 				},
-				new(){
+				$new(){
 				},
 				print(self){}
 			});
@@ -131,7 +131,7 @@ describe('impl.js',()=>{
 			});
 
 			impl(FooTrait,Bar,{
-				new(){
+				$new(){
 					return Bar({x:0,y:0});
 				},
 				print(self){
@@ -152,7 +152,7 @@ describe('impl.js',()=>{
 		});
 		it('should panic when passed block not fully implement trait interface',()=>{
 			let FooTrait=trait({
-				foo(){}
+				$foo(){}
 			});
 			let Bar=struct({});
 			expect(()=>{
@@ -161,14 +161,14 @@ describe('impl.js',()=>{
 		});
 		it('should ignore unnecessary methods',()=>{
 			let FooTrait=trait({
-				foo(){}
+				$foo(){}
 			});
 			let Bar=struct({});
 			impl(FooTrait,Bar,{
-				foo(){
+				$foo(){
 					return true;
 				},
-				bar(){
+				$bar(){
 					return true;
 				}
 			});

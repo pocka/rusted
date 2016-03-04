@@ -94,7 +94,7 @@ describe('struct.js',()=>{
 		it('should works properly if no arguments (Unit-like struct)',()=>{
 			let Unit=struct();
 			impl(Unit,{
-				foo(){
+				$foo(){
 					return 3;
 				},
 				bar(self){
