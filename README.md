@@ -106,8 +106,8 @@ let SomeStruct=struct({
 });
 
 impl(SomeStruct,{
-	// without placing `self` argument at first, we can declare associated function (static method)
-	new(x,y){
+	// You can define associated function (static method) by starting method name with "$".
+	$new(x,y){
 		return SomeStruct({x,y});
 	},
 	print(self){
@@ -115,7 +115,7 @@ impl(SomeStruct,{
 	}
 });
 
-let some_struct=SomeStruct.new(2,3);
+let some_struct=SomeStruct.new(2,3); // You don't need to attach "$" at first. "$" was removed at attaching proccess
 some_struct.print(); // > (2,3)
 
 // For enum
