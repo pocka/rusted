@@ -6,6 +6,10 @@ export function is_empty_function(fn){
 	return !!fn.toString().match(/^function\*?\s*[a-zA-Z0-9_$]*\([^)]*\)\s*{}$/);
 }
 
+export function format_static_method_name(name){
+	return name[0]==='$'?name.slice(1):name;
+}
+
 export function check_type(type,value){
 	let is_constructor=typeof type==='function',
 		expected=type,
