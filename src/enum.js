@@ -14,13 +14,13 @@ let factory=function(variants){
 			'__name':{
 				value:name,
 				writable:false,
-				enumerable:false,
+				enumerable:true,
 				configurable:false
 			},
 			'__data':{
 				value:data,
 				writable:false,
-				enumerable:false,
+				enumerable:true,
 				configurable:false
 			}
 		});
