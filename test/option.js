@@ -5,6 +5,12 @@ import match from '../src/match';
 
 describe('option.js',()=>{
 	describe('Option',()=>{
+		describe('should be comparable', () => {
+			it('Some(5) is equal to Some(5)', () => {
+				expect(Some(5)).not.to.deep.equal(Some(6));
+			});
+		});
+
 		describe('#is_some',()=>{
 			it('should returns true',()=>{
 				let x=Some(2);
