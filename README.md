@@ -1,3 +1,7 @@
+# Deprecated
+
+Use [ReasonML](https://reasonml.github.io/), [stage-n Javascript](https://github.com/tc39/proposals) with [Babel](https://babeljs.io/docs/plugins/#stage-x-experimental-presets), or Compile Rust to wasm with [stdweb crate](https://github.com/koute/stdweb).
+
 [![npm version](https://badge.fury.io/js/rusted.svg)](https://badge.fury.io/js/rusted)
 [![Coverage Status](https://coveralls.io/repos/github/pocka/rusted/badge.svg?branch=master)](https://coveralls.io/github/pocka/rusted?branch=master)
 [![Build Status](https://travis-ci.org/pocka/rusted.svg?branch=master)](https://travis-ci.org/pocka/rusted)
